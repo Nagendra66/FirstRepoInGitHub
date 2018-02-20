@@ -14,4 +14,5 @@
         <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
+    <asp:Label ID="lbl_1" runat="server" Text="Hello !!!"></asp:Label>
 </asp:Content>
