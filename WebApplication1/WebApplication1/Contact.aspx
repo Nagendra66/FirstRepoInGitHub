@@ -15,4 +15,6 @@
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
     <asp:Label ID="lbl_1" runat="server" Text="Hello !!!"></asp:Label>
+    <asp:Label ID="lbl_2" runat="server" Text="Hi !!!"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Hi !!!"></asp:Label>
 </asp:Content>
