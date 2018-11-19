@@ -10,7 +10,7 @@ stage('Checkout')
     stage('Build')
     {
 		try{
-			notifyBuildStatus('STARTED')
+			notifyBuildStatus('started')
 			//Build the Solution
 			bat '"C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\MSBuild.exe"  "WebApplication1/WebApplication1.sln" /t:clean /p:Configuration=Release /p:VisualStudioVersion=14.0 /p:DeployOnBuild=true /t:Rebuild /p:GenerateSerializationAssemblies=Off'
 			}
@@ -26,14 +26,14 @@ stage('Checkout')
     }
 }
 
-def notifyBuildStatus(String buildStatus = 'STARTED') {
+def notifyBuildStatus(String buildStatus = 'started') {
   // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  buildStatus =  buildStatus ?: 'completed successfully'
  
   // Default values
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def subject = "Mirabel 2.0 Build ${buildStatus}"
   def summary = "${subject} (${env.BUILD_URL})"
-  def details = """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+  def details =	"Mirabel2.0 - Build # ${env.BUILD_NUMBER} -  buildStatus"					
     <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"""
  
   // Send notifications
