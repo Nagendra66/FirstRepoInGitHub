@@ -13,15 +13,15 @@ stage('Checkout')
 			notifyBuildStatus('started')
 			//Build the Solution
 			bat '"C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\MSBuild.exe"  "WebApplication1/WebApplication1.sln" /t:clean /p:Configuration=Release /p:VisualStudioVersion=14.0 /p:DeployOnBuild=true /t:Rebuild /p:GenerateSerializationAssemblies=Off'
+
+			// Success or failure, always send notifications
+			notifyBuildStatus(currentBuild.result)
 			}
 			catch(e){
 				// If there was an exception thrown, the build failed
 				currentBuild.result = "FAILED"
+				notifyFailed()
 				throw e
-			}
-			finally{
-				// Success or failure, always send notifications
-			notifyBuildStatus(currentBuild.result)
 			}
     }
 }
@@ -45,3 +45,14 @@ def notifyBuildStatus(String buildStatus = 'started') {
       to: '$DEFAULT_RECIPIENTS'
     )
 }
+
+ def notifyFailed() {
+ 
+   emailext (
+       subject: "Mirabel 2.0 Build FAILED",
+       body:"""<p> Mirabel2.0 - Build # ${env.BUILD_NUMBER} -  FAILED</p>					
+				<p> Changeset: ${GIT_COMMIT} User: ${GIT_COMMITTER_NAME} or ${GIT_AUTHOR_NAME}</p>
+				<p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+       to: '$DEFAULT_RECIPIENTS'
+     )
+ }
