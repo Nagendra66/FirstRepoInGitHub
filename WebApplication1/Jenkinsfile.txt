@@ -1,0 +1,15 @@
+node
+{
+stage('Checkout') 
+    {
+		//Checkout the latest code from source controller
+		git 'https://github.com/Nagendra66/FirstRepoInGitHub.git'
+		//Bundle the Code and packakging
+        bat 'C:/Tools/nuget.exe restore WebApplication1.sln'
+    }
+    stage('Build')
+    {
+		//Build the Solution
+		bat '"C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\MSBuild.exe"  "WebApplication1.sln" /t:clean /p:Configuration=Release /p:VisualStudioVersion=14.0 /p:DeployOnBuild=true /t:Rebuild /p:GenerateSerializationAssemblies=Off'
+    }
+	}
