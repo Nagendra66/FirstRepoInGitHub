@@ -40,6 +40,6 @@ def notifyBuildStatus(String buildStatus = 'STARTED') {
   emailext (
       subject: subject,
       body: details,
-      to: 'dnagendra@mirabeltechnologies.com,cc:nagendra.dvvs23@gmail.com'
+      to: '$DEFAULT_RECIPIENTS'
     )
 }
