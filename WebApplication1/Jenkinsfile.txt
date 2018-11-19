@@ -33,8 +33,10 @@ def notifyBuildStatus(String buildStatus = 'started') {
   // Default values
   def subject = "Mirabel 2.0 Build ${buildStatus}"
   def summary = "${subject} (${env.BUILD_URL})"
-  def details =	"Mirabel2.0 - Build # ${env.BUILD_NUMBER} -  buildStatus"					
-    """<p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"""
+  def details =	"""<p> Mirabel2.0 - Build # ${env.BUILD_NUMBER} -  ${buildStatus} </p>					
+					<p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"""
+
+
  
   // Send notifications
   emailext (
